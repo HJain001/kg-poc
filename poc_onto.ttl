@@ -1,0 +1,341 @@
+@prefix : <http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17/> .
+
+<http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#hasFeature
+:hasFeature rdf:type owl:ObjectProperty ;
+            rdfs:domain :KPI ;
+            rdfs:range :Feature ;
+            rdfs:comment "Features present inside the KPI"@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#hasKPI
+:hasKPI rdf:type owl:ObjectProperty ;
+        rdfs:domain :ProcessArea ;
+        rdfs:range :KPI ;
+        rdfs:comment "KPI present inside specific processes"@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#hasProcessArea
+:hasProcessArea rdf:type owl:ObjectProperty ;
+                rdfs:domain :BusinessUnit ;
+                rdfs:range :ProcessArea ;
+                rdfs:comment "Different Process Areas Associated with the Business Unit"@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#influences
+:influences rdf:type owl:ObjectProperty ;
+            rdfs:domain :KPI ;
+            rdfs:range :KPI ;
+            rdfs:comment "One KPI influences other KPIs"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#BusinessUnit
+:BusinessUnit rdf:type owl:Class ;
+              rdfs:comment "Contains information about different business units available."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Compliant_Suppliers
+:Compliant_Suppliers rdf:type owl:Class ;
+                     rdfs:subClassOf :Feature ;
+                     rdfs:comment "Suppliers adhering to regulatory and contractual requirements"@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Correct_Orders
+:Correct_Orders rdf:type owl:Class ;
+                rdfs:subClassOf :Feature ;
+                rdfs:comment "Orders accurately fulfilled as per specifications."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Delivery_Time
+:Delivery_Time rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty :hasFeature ;
+                                     owl:someValuesFrom :Number_of_Orders
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :hasFeature ;
+                                     owl:someValuesFrom :Total_Lead_Time
+                                   ] ;
+               rdfs:subClassOf :KPI ;
+               rdfs:comment "Duration taken for goods to reach their destination."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Ethical_Sourcing_Percentage
+:Ethical_Sourcing_Percentage rdf:type owl:Class ;
+                             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasFeature ;
+                                                   owl:someValuesFrom :Ethically_Sourced_Products
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasFeature ;
+                                                   owl:someValuesFrom :Total_Products
+                                                 ] ;
+                             rdfs:subClassOf :KPI ;
+                             rdfs:comment "Percentage of products sourced ethically within the supply chain."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Ethically_Sourced_Products
+:Ethically_Sourced_Products rdf:type owl:Class ;
+                            rdfs:subClassOf :Feature ;
+                            rdfs:comment "Products procured following ethical and sustainable sourcing practices."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Feature
+:Feature rdf:type owl:Class ;
+         rdfs:comment "Represents the features that are used to calculate different KPIs"@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#KPI
+:KPI rdf:type owl:Class ;
+     rdfs:comment "Represents the different KPI related to the processes."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Logistics_Distribution
+:Logistics_Distribution rdf:type owl:Class ;
+                        rdfs:subClassOf :ProcessArea ;
+                        rdfs:comment "Management and optimization of goods movement across the supply chain."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Manufacturing_Quality
+:Manufacturing_Quality rdf:type owl:Class ;
+                       rdfs:subClassOf :ProcessArea ;
+                       rdfs:comment "Standard of goods produced in the manufacturing process."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Number_of_Deliveries
+:Number_of_Deliveries rdf:type owl:Class ;
+                      rdfs:subClassOf :Feature ;
+                      rdfs:comment "Total count of completed deliveries within a period."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Number_of_Orders
+:Number_of_Orders rdf:type owl:Class ;
+                  rdfs:subClassOf :Feature ;
+                  rdfs:comment "Total count of orders placed within a period."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#On_Time_Deliveries
+:On_Time_Deliveries rdf:type owl:Class ;
+                    rdfs:subClassOf :Feature ;
+                    rdfs:comment "Deliveries that reached their destination within the expected timeframe."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#On_Time_Delivery_Percentage
+:On_Time_Delivery_Percentage rdf:type owl:Class ;
+                             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasFeature ;
+                                                   owl:someValuesFrom :On_Time_Deliveries
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasFeature ;
+                                                   owl:someValuesFrom :Total_Deliveries
+                                                 ] ;
+                             rdfs:subClassOf :KPI ;
+                             rdfs:comment "Proportion of deliveries completed within the expected timeframe."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Order_Accuracy_Rate
+:Order_Accuracy_Rate rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasFeature ;
+                                           owl:someValuesFrom :Correct_Orders
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasFeature ;
+                                           owl:someValuesFrom :Total_Orders_Processed
+                                         ] ;
+                     rdfs:subClassOf :KPI ;
+                     rdfs:comment "Measure of how accurately orders are processed and delivered."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Order_Delivered_on_Time
+:Order_Delivered_on_Time rdf:type owl:Class ;
+                         rdfs:subClassOf :Feature ;
+                         rdfs:comment "A specific order that was successfully delivered on schedule."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Order_Fulfillment_Rate
+:Order_Fulfillment_Rate rdf:type owl:Class ;
+                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                              owl:onProperty :hasFeature ;
+                                              owl:someValuesFrom :Order_Delivered_on_Time
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :hasFeature ;
+                                              owl:someValuesFrom :Total_Orders
+                                            ] ;
+                        rdfs:subClassOf :KPI ;
+                        rdfs:comment "Percentage of orders successfully fulfilled as requested."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#ProcessArea
+:ProcessArea rdf:type owl:Class ;
+             rdfs:comment "Represent different process areas related to different business units"@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Production_Efficiency
+:Production_Efficiency rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Restriction ;
+                                             owl:onProperty :hasFeature ;
+                                             owl:someValuesFrom :Compliant_Suppliers
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :hasFeature ;
+                                             owl:someValuesFrom :Total_Suppliers
+                                           ] ;
+                       rdfs:subClassOf :KPI ;
+                       rdfs:comment "Effectiveness of the manufacturing process in minimizing waste and maximizing output."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Quality_Defect_Rate
+:Quality_Defect_Rate rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasFeature ;
+                                           owl:someValuesFrom :Ethically_Sourced_Products
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasFeature ;
+                                           owl:someValuesFrom :Total_Products
+                                         ] ;
+                     rdfs:subClassOf :KPI ;
+                     rdfs:comment "Percentage of products failing to meet quality standards."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Sourcing_Procurement
+:Sourcing_Procurement rdf:type owl:Class ;
+                      rdfs:subClassOf :ProcessArea ;
+                      rdfs:comment "Acquisition process of raw materials and goods for production."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Supplier_Compliance_Rate
+:Supplier_Compliance_Rate rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                owl:onProperty :hasFeature ;
+                                                owl:someValuesFrom :Compliant_Suppliers
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :hasFeature ;
+                                                owl:someValuesFrom :Total_Suppliers
+                                              ] ;
+                          rdfs:subClassOf :KPI ;
+                          rdfs:comment "Rate at which suppliers meet regulatory and contractual requirements."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Supplier_Lead_Time
+:Supplier_Lead_Time rdf:type owl:Class ;
+                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                          owl:onProperty :hasFeature ;
+                                          owl:someValuesFrom :Number_of_Orders
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :hasFeature ;
+                                          owl:someValuesFrom :Total_Lead_Time
+                                        ] ;
+                    rdfs:subClassOf :KPI ;
+                    rdfs:comment "Time taken by suppliers to fulfill and deliver an order."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Supply_Chain_Manufacturing
+:Supply_Chain_Manufacturing rdf:type owl:Class ;
+                            rdfs:subClassOf :BusinessUnit ;
+                            rdfs:comment "Processes and activities involved in producing goods within the supply chain domain."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Deliveries
+:Total_Deliveries rdf:type owl:Class ;
+                  rdfs:subClassOf :Feature ;
+                  rdfs:comment "Aggregate number of deliveries completed over time."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Lead_Time
+:Total_Lead_Time rdf:type owl:Class ;
+                 rdfs:subClassOf :Feature ;
+                 rdfs:comment "Cumulative time taken from order placement to final delivery."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Logistics_Cost
+:Total_Logistics_Cost rdf:type owl:Class ;
+                      rdfs:subClassOf :Feature ;
+                      rdfs:comment "Sum of all expenses associated with logistics and transportation."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Orders
+:Total_Orders rdf:type owl:Class ;
+              rdfs:subClassOf :Feature ;
+              rdfs:comment "Overall number of orders processed in a given timeframe."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Orders_Processed
+:Total_Orders_Processed rdf:type owl:Class ;
+                        rdfs:subClassOf :Feature ;
+                        rdfs:comment "Count of all orders successfully handled and fulfilled."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Products
+:Total_Products rdf:type owl:Class ;
+                rdfs:subClassOf :Feature ;
+                rdfs:comment "Aggregate number of distinct products available or processed."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Suppliers
+:Total_Suppliers rdf:type owl:Class ;
+                 rdfs:subClassOf :Feature ;
+                 rdfs:comment "Total number of suppliers in the supply chain network."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Total_Warehouse_Capacity
+:Total_Warehouse_Capacity rdf:type owl:Class ;
+                          rdfs:subClassOf :Feature ;
+                          rdfs:comment "Maximum storage capacity available across warehouses."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Transportation_Cost
+:Transportation_Cost rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasFeature ;
+                                           owl:someValuesFrom :Number_of_Deliveries
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasFeature ;
+                                           owl:someValuesFrom :Total_Logistics_Cost
+                                         ] ;
+                     rdfs:subClassOf :KPI ;
+                     rdfs:comment "Total expenses incurred for moving goods across the supply chain."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Used_Warehouse_Space
+:Used_Warehouse_Space rdf:type owl:Class ;
+                      rdfs:subClassOf :Feature ;
+                      rdfs:comment "Portion of warehouse capacity currently occupied."@en .
+
+
+###  http://www.semanticweb.org/hj0357/ontologies/2025/2/business-map-17#Warehouse_Utilization
+:Warehouse_Utilization rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Restriction ;
+                                             owl:onProperty :hasFeature ;
+                                             owl:someValuesFrom :Total_Warehouse_Capacity
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :hasFeature ;
+                                             owl:someValuesFrom :Used_Warehouse_Space
+                                           ] ;
+                       rdfs:subClassOf :KPI ;
+                       rdfs:comment "Efficiency of warehouse space usage relative to total capacity."@en .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
